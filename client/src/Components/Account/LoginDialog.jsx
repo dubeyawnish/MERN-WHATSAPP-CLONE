@@ -1,11 +1,12 @@
 import {Dialog,List,Box,ListItem,styled, Typography} from '@mui/material';
 import {GoogleLogin} from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
+import {useContext} from 'react';
 
 
 // components
 import { qrCodeImage } from '../../Constants/data';
-
+import { AccountContext } from '../../Context/AccountProvider';
 
 const Container= styled(Box)`
 padding: 56px 0 56px 56px;
@@ -50,6 +51,7 @@ const Component=styled(Box)`
 
 
  const LoginDialog = ()=>{
+    const {setAccount} =useContext(AccountContext);
 
  const onLoginError =(res)=>{
     console.log('login failed',res)
@@ -57,8 +59,8 @@ const Component=styled(Box)`
  }
   
  const onLoginSuccess =(res)=>{
-   const decode= jwt_decode(res.credential);
-   console.log(decode);
+   const decoded= jwt_decode(res.credential);
+   setAccount(decoded)
 
  }
 
