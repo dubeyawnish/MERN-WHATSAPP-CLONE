@@ -4,7 +4,8 @@
 import {Box,styled} from '@mui/material';
 import { AccountContext } from '../../../Context/AccountProvider'
 import { useContext } from 'react'
-import {Chat as MessageIcon,MoreVert} from '@mui/icons-material';
+import {Chat as MessageIcon} from '@mui/icons-material';
+import HeaderMenu from './HeaderMenu';
 
 
 
@@ -49,7 +50,7 @@ borderRadius:'50px',
             <Image src={account.picture} alt="dp" />
             <Wrappr>
                 <MessageIcon />
-                <MoreVert />
+                <HeaderMenu />
             </Wrappr>
           </Component>
 
