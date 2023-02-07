@@ -1,6 +1,7 @@
 
 
 import { Box } from '@mui/system'
+import Conversations from './Conversations';
 import Header from './Header'
 import Search from './Search';
 
@@ -15,6 +16,7 @@ const Menu =()=>{
         <Box>
             <Header />
             <Search />
+            <Conversations />
         </Box>
     )
 }
