@@ -3,9 +3,10 @@
 
 import {Box,styled} from '@mui/material';
 import { AccountContext } from '../../../Context/AccountProvider'
-import { useContext } from 'react'
+import { useContext ,useState} from 'react'
 import {Chat as MessageIcon} from '@mui/icons-material';
 import HeaderMenu from './HeaderMenu';
+import InfoDrawer from '../../Drawer/inforDrawer'
 
 
 
@@ -43,17 +44,25 @@ borderRadius:'50px',
 
 
  const Header=()=>{
+ const [openDrawer,setOpenDrawer]= useState(false);
+
+
     const {account} =useContext(AccountContext);
+  const toggleDrawer=()=>{
+    setOpenDrawer(true);
+  }
+
+
     return(
         <>
           <Component>
-            <Image src={account.picture} alt="dp" />
+            <Image src={account.picture} alt="dp" onClick={()=>toggleDrawer()} />
             <Wrappr>
                 <MessageIcon />
-                <HeaderMenu />
+                <HeaderMenu setOpenDrawer={setOpenDrawer}/>
             </Wrappr>
           </Component>
-
+          <InfoDrawer open={openDrawer} setOpen={setOpenDrawer} />
 
         </>
     )
