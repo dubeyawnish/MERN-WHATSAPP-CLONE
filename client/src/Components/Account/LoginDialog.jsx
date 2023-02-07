@@ -7,6 +7,7 @@ import {useContext} from 'react';
 // components
 import { qrCodeImage } from '../../Constants/data';
 import { AccountContext } from '../../Context/AccountProvider';
+import { addUser } from '../../service/api';
 
 const Container= styled(Box)`
 padding: 56px 0 56px 56px;
@@ -58,9 +59,10 @@ const Component=styled(Box)`
 
  }
   
- const onLoginSuccess =(res)=>{
+ const onLoginSuccess =async(res)=>{
    const decoded= jwt_decode(res.credential);
-   setAccount(decoded)
+   setAccount(decoded);
+   await addUser(decoded);
 
  }
 
