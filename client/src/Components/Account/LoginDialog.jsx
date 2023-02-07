@@ -67,14 +67,15 @@ const Component=styled(Box)`
         <Dialog  
             open={true}
             PaperProps={{sx:dialogStyle}}
+            hideBackdrop={true}
         >
                 <Component>
                             <Container>
                                  <Title>To use whatsapp on your computer:</Title>
                                  <StyleList>
-                                    <StyleList>1. Open whatsapp on your phone</StyleList>
-                                    <StyleList>2. Tap Menu Setting and select whatsapp web</StyleList>
-                                    <StyleList>3. Point your phone to this screen to capture the code</StyleList>
+                                    <ListItem>1. Open whatsapp on your phone</ListItem>
+                                    <ListItem>2. Tap Menu Setting and select whatsapp web</ListItem>
+                                    <ListItem>3. Point your phone to this screen to capture the code</ListItem>
                                  </StyleList>
                             </Container>
 

@@ -4,6 +4,7 @@ import { Box,AppBar, Toolbar, styled } from '@mui/material';
 
 // Components
 import LoginDialog from "./Account/LoginDialog";
+import ChatDialog from './Chat/ChatDialog';
 
 const Component=styled(Box)`
 height:100vh;
