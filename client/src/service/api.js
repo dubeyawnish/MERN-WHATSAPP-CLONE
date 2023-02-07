@@ -6,9 +6,10 @@ const url='http://localhost:8000';
 
 export const addUser =async(data)=>{
     try{
-        await axois.post(url,data);
+        await axois.post(`${url}/add`,data);
 
-    }catch(error){
+    }
+    catch(error){
         console.log("Error while addUser api " ,error.message);
     }
 }
