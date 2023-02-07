@@ -5,7 +5,7 @@ import Messenger from "./Components/Messenger";
 
 
 function App() {
-const clientId=''
+const clientId='790465726657-dnj4bq371d2b5tv4ijremmp96qk7cdeu.apps.googleusercontent.com'
 
 
   return (

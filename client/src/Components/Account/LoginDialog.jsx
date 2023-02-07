@@ -1,5 +1,6 @@
 import {Dialog,List,Box,ListItem,styled, Typography} from '@mui/material';
 import {GoogleLogin} from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
 
 
 // components
@@ -50,11 +51,14 @@ const Component=styled(Box)`
 
  const LoginDialog = ()=>{
 
- const onLoginError =()=>{
+ const onLoginError =(res)=>{
+    console.log('login failed',res)
 
  }
   
- const onLoginSuccess =()=>{
+ const onLoginSuccess =(res)=>{
+   const decode= jwt_decode(res.credential);
+   console.log(decode);
 
  }
 
