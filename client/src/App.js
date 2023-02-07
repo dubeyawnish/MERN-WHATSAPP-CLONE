@@ -1,14 +1,17 @@
-
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import Messenger from "./Components/Messenger";
 // components
 
 
 function App() {
+const clientId=''
+
+
   return (
-    <div>
+    <GoogleOAuthProvider clientId={clientId}>
       <Messenger />
-    </div>
+    </GoogleOAuthProvider>
   );
 }
 
