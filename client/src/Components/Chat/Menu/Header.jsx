@@ -4,7 +4,7 @@
 import {Box,styled} from '@mui/material';
 import { AccountContext } from '../../../Context/AccountProvider'
 import { useContext } from 'react'
-import {Chat as MessageIcon,Morevert} from '@mui/icons-material';
+import {Chat as MessageIcon,MoreVert} from '@mui/icons-material';
 
 
 
@@ -12,7 +12,22 @@ const Component=styled(Box)`
 height:44px;
 background:#ededed;
 padding : 8px 16px;
+display:flex;
+align-items:center;
+`;
+const Wrappr =styled(Box)`
+margin-left:auto; 
+ &>*{
+    margin-left:2px;
+    padding:8px;
+    color:#000;
 
+ } ;
+ & : first-child{
+    font-size:22px;
+    margin-right:8px;
+    margin-top:3px;
+ }
 `
 const Image=styled('img')({
 
@@ -32,10 +47,10 @@ borderRadius:'50px',
         <>
           <Component>
             <Image src={account.picture} alt="dp" />
-            <Box>
+            <Wrappr>
                 <MessageIcon />
-                <Morevert />
-            </Box>
+                <MoreVert />
+            </Wrappr>
           </Component>
 
 
