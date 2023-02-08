@@ -1,4 +1,7 @@
 import { Box, Typography, styled } from '@mui/material';
+import { useContext ,useState} from 'react';
+import {AccountContext} from '../../../Context/AccountProvider'
+import { newMessage } from '../../../service/api';
 
 import Footer from './Footer';
 
@@ -14,13 +17,36 @@ const Component = styled(Box)`
 `;
 
 
-const Messages =({person})=>{
+const Messages =({person,conversation})=>{
+    const [value,setValue]=useState('');
+    const {account} =useContext(AccountContext);
+
+
+    const sendText=async(e)=>{
+        const code=e.keycode ||e.which;
+        if(code===13){
+            let message={
+                senderId: account.sub,
+                receiverId:person.sub,
+               conversationId:conversation._id,
+               type:'text',
+               text:value,
+            }
+          await newMessage(message);
+          setValue(''); 
+           
+        }
+
+    }
     return (
         <Wrapper>
             <Component>
 
             </Component>
-            <Footer />
+            <Footer sendText={sendText} 
+            setValue={setValue}  
+            value={value}
+            />
         </Wrapper>
     )
 }
