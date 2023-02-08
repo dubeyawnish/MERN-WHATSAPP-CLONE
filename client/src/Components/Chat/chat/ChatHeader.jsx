@@ -40,9 +40,9 @@ const Status = styled(Typography)`
     margin-left: 12px !important;
 `;
 
-const ChatHeader = () => {  
+const ChatHeader = ({person}) => {  
 
-    const url =  defaultProfilePicture;
+    const url =  person.picture || defaultProfilePicture;
     
     //const { activeUsers } = useContext(AccountContext);
 
@@ -50,7 +50,7 @@ const ChatHeader = () => {
         <Header>
             <Image src={url} alt="display picture" />     
             <Box>
-                <Name>Name</Name>
+                <Name>{person.name}</Name>
                {/* <Status>{activeUsers?.find(user => user.sub === person.sub) ? 'Online' : 'Offline'}</Status>  */}
 
             </Box>   

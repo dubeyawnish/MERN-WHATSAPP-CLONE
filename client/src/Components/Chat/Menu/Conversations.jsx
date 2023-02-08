@@ -20,16 +20,17 @@ opacity:.6;
 
 
 
-const Conversations =()=>{
+const Conversations =({text})=>{
     const {account}=useContext(AccountContext);
     const[users,setUsers] = useState([]);
     useEffect(()=>{
         const fetchData=async()=>{
           let response= await getUsers();
-          setUsers(response);
+          let fiteredData = response.filter(user => user.name.toLowerCase().includes(text.toLowerCase()));
+            setUsers(fiteredData);
         }
         fetchData();
-    },[]);
+    },[text]);
 
     return (
         <Component>

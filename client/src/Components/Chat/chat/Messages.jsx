@@ -14,7 +14,7 @@ const Component = styled(Box)`
 `;
 
 
-const Messages =()=>{
+const Messages =({person})=>{
     return (
         <Wrapper>
             <Component>
