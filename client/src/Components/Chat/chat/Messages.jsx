@@ -4,6 +4,7 @@ import { AccountContext } from '../../../Context/AccountProvider'
 import { getMessages, newMessage } from '../../../service/api';
 
 import Footer from './Footer';
+import Message from './Message';
 
 
 const Wrapper = styled(Box)`
@@ -16,21 +17,29 @@ const Component = styled(Box)`
     overflow-y: scroll;
 `;
 
+const Container=styled(Box)`
+ padding :1px 80px;
+`
+
 
 const Messages = ({ person, conversation }) => {
+    const[messages,setMessages]=useState([]);
     const [value, setValue] = useState('');
     const { account } = useContext(AccountContext);
-    console.log(conversation._id);
+
+    const[newMessageFlag ,setNewMessageFlag]=useState(false);
+    //console.log(conversation._id);
 
 
 
     useEffect(() => {
         const getMessageDetails = async () => {
             let data = await getMessages(conversation._id);
-            console.log(data);
+            //console.log(data);
+            setMessages(data);
         }
         getMessageDetails();
-    }, [person._id,conversation._id]);
+    }, [person._id,conversation._id,newMessageFlag ]);
 
 
     const sendText = async (e) => {
@@ -45,6 +54,7 @@ const Messages = ({ person, conversation }) => {
             }
             await newMessage(message);
             setValue('');
+            setNewMessageFlag(prev=>!prev);
 
         }
 
@@ -52,6 +62,14 @@ const Messages = ({ person, conversation }) => {
     return (
         <Wrapper>
             <Component>
+                {
+                    messages &&messages.map(message =>(
+                        <Container>
+                             <Message message={message} />
+                        </Container>
+                        
+                    ))
+                }
 
             </Component>
             <Footer sendText={sendText}
