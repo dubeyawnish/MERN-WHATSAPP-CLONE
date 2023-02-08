@@ -48,8 +48,19 @@ export const getConversation =async(users)=>{
 
 export const newMessage=async(data)=>{
     try{
-     await axios.post(`${url}/message/add`,data);
+     return await axios.post(`${url}/message/add`,data);
     }catch(error){
         console.log("Error while calling newMessage api",error.message);
+    }
+}
+
+
+export const getMessages=async(id)=>{
+    try{
+        let response=await axios.get(`${url}/message/get/${id}`)
+         return response.data;
+    }catch(error){
+        console.log("Error while callin getMessage api",error.message);
+
     }
 }

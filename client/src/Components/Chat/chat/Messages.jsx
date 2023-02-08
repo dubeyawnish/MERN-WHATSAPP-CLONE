@@ -1,7 +1,7 @@
 import { Box, Typography, styled } from '@mui/material';
-import { useContext ,useState} from 'react';
-import {AccountContext} from '../../../Context/AccountProvider'
-import { newMessage } from '../../../service/api';
+import { useContext, useEffect, useState } from 'react';
+import { AccountContext } from '../../../Context/AccountProvider'
+import { getMessages, newMessage } from '../../../service/api';
 
 import Footer from './Footer';
 
@@ -17,24 +17,35 @@ const Component = styled(Box)`
 `;
 
 
-const Messages =({person,conversation})=>{
-    const [value,setValue]=useState('');
-    const {account} =useContext(AccountContext);
+const Messages = ({ person, conversation }) => {
+    const [value, setValue] = useState('');
+    const { account } = useContext(AccountContext);
+    console.log(conversation._id);
 
 
-    const sendText=async(e)=>{
-        const code=e.keycode ||e.which;
-        if(code===13){
-            let message={
+
+    useEffect(() => {
+        const getMessageDetails = async () => {
+            let data = await getMessages(conversation._id);
+            console.log(data);
+        }
+        getMessageDetails();
+    }, [person._id,conversation._id]);
+
+
+    const sendText = async (e) => {
+        const code = e.keycode || e.which;
+        if (code === 13) {
+            let message = {
                 senderId: account.sub,
-                receiverId:person.sub,
-               conversationId:conversation._id,
-               type:'text',
-               text:value,
+                receiverId: person.sub,
+                conversationId: conversation._id,
+                type: 'text',
+                text: value,
             }
-          await newMessage(message);
-          setValue(''); 
-           
+            await newMessage(message);
+            setValue('');
+
         }
 
     }
@@ -43,9 +54,9 @@ const Messages =({person,conversation})=>{
             <Component>
 
             </Component>
-            <Footer sendText={sendText} 
-            setValue={setValue}  
-            value={value}
+            <Footer sendText={sendText}
+                setValue={setValue}
+                value={value}
             />
         </Wrapper>
     )
