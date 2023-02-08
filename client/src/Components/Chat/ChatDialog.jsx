@@ -2,6 +2,7 @@ import { Dialog } from "@mui/material";
 import Menu from './Menu/Menu';
 import EmptyChat from "./chat/EmptyChat";
 import {Box,styled ,Typography} from '@mui/material'
+import ChatBox from './chat/ChatBox'
 
 
 const Component=styled(Box)`
@@ -12,7 +13,7 @@ const LeftComponent=styled(Box)`
 `
 const RightComponent= styled(Box)`
 widht:73%;
-min-width:300px;
+min-width:1045px;
 height:100%;
 border-left:1px solid rgba(0,0,0 ,0.14);
 `
@@ -41,7 +42,9 @@ const  ChatDialog =()=>{
         <Menu />
        </LeftComponent>
        <RightComponent>
-         <EmptyChat />
+        {/* <EmptyChat /> */}
+       
+        <ChatBox />
        </RightComponent>
 
   </Component>
