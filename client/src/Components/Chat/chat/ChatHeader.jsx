@@ -44,14 +44,16 @@ const ChatHeader = ({person}) => {
 
     const url =  person.picture || defaultProfilePicture;
     
-    //const { activeUsers } = useContext(AccountContext);
+    const { activeUsers } = useContext(AccountContext);
+    console.log(activeUsers);
 
     return (
         <Header>
             <Image src={url} alt="display picture" />     
             <Box>
                 <Name>{person.name}</Name>
-               {/* <Status>{activeUsers?.find(user => user.sub === person.sub) ? 'Online' : 'Offline'}</Status>  */}
+                
+                <Status>{activeUsers?.find(user => user.sub === person.sub) ? 'Online' : 'Offline'}</Status>
 
             </Box>   
             <RightContainer>
