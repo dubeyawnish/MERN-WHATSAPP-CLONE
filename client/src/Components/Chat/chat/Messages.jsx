@@ -25,10 +25,10 @@ const Container=styled(Box)`
 const Messages = ({ person, conversation }) => {
     const[messages,setMessages]=useState([]);
     const [value, setValue] = useState('');
-    const { account,socket } = useContext(AccountContext);
+    const { account,socket,newMessageFlag,setNewMessageFlag } = useContext(AccountContext);
     const [image,setImage]=useState('');
     const scrollRef=useRef();
-    const[newMessageFlag ,setNewMessageFlag]=useState(false);
+    
     const [file,setFile]=useState();
     const [incomingMessage,setIncomingMessage]=useState(null);
     //console.log(conversation._id);
