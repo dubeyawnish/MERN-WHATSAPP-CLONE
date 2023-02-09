@@ -10,14 +10,14 @@ import { useState } from 'react';
 
 
 
-const Menu =()=>{
-const [text,setText]=useState('');
-   
+const Menu = () => {
+    const [text, setText] = useState('');
+
     return (
         <Box>
             <Header />
-            <Search setText={setText}/>
-            <Conversations text={text}/>
+            <Search setText={setText} />
+            <Conversations text={text} />
         </Box>
     )
 }

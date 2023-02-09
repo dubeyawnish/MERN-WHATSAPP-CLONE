@@ -1,6 +1,6 @@
 import { EmojiEmotions, AttachFile, Mic } from '@mui/icons-material';
 import { Box, styled, InputBase } from '@mui/material';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { uploadFile } from '../../../service/api';
 
 
@@ -36,29 +36,29 @@ const ClipIcon = styled(AttachFile)`
     transform: rotate(40deg);
 `;
 
-const Footer =({sendText,setValue,value,file,setFile,setImage})=>{
-    useEffect(()=>{
-       const getImage= async()=>{
-        //converted file into chunks that is formedata
-        if(file){
-            const data=new FormData();
-            data.append("name",file.name);
-            data.append("file",file);
+const Footer = ({ sendText, setValue, value, file, setFile, setImage }) => {
+    useEffect(() => {
+        const getImage = async () => {
+            //converted file into chunks that is formedata
+            if (file) {
+                const data = new FormData();
+                data.append("name", file.name);
+                data.append("file", file);
 
-            let response=await uploadFile(data);
-            setImage(response.data);
+                let response = await uploadFile(data);
+                setImage(response.data);
 
+            }
         }
-       }
-       getImage();
-    },[file])
+        getImage();
+    }, [file])
 
-    const onFileChange=(e)=>{
+    const onFileChange = (e) => {
         console.log(e.target);
-         setFile(e.target.files[0]);
-         setValue(e.target.files[0].name);
+        setFile(e.target.files[0]);
+        setValue(e.target.files[0].name);
     }
-   
+
     return (
         <Container>
             <EmojiEmotions />
@@ -69,18 +69,18 @@ const Footer =({sendText,setValue,value,file,setFile,setImage})=>{
                 type='file'
                 id="fileInput"
                 style={{ display: 'none' }}
-                onChange={(e)=>onFileChange(e)}
-              
+                onChange={(e) => onFileChange(e)}
+
             />
 
             <Search>
                 <InputField
                     placeholder="Type a message"
                     inputProps={{ 'aria-label': 'search' }}
-                    onChange={(e)=>setValue(e.target.value)}
-                    onKeyPress={(e)=>sendText(e)}
+                    onChange={(e) => setValue(e.target.value)}
+                    onKeyPress={(e) => sendText(e)}
                     value={value}
-                    
+
                 />
             </Search>
             <Mic />

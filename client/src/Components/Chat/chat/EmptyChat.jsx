@@ -1,4 +1,4 @@
-  
+
 
 
 import { Box, styled, Typography, Divider } from '@mui/material';
@@ -16,12 +16,12 @@ const Component = styled(Box)`
 const Container = styled(Box)`
     padding: 0 200px;
 `;
-    
+
 const Image = styled('img')({
     marginTop: 100,
     width: 400
 })
-   
+
 const Title = styled(Typography)`
     font-size: 32px;
     font-family: inherit;
@@ -43,7 +43,7 @@ const StyledDivider = styled(Divider)`
 `;
 
 const EmptyChat = () => {
-    
+
     return (
         <Component>
             <Container>

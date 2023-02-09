@@ -50,7 +50,7 @@ const InfoDrawer = ({ open, setOpen }) => {
                 <Text>Profile</Text>
             </Header>
             <Component>
-                { <Profile />}
+                {<Profile />}
             </Component>
         </Drawer>
     );

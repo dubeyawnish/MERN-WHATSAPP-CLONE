@@ -1,7 +1,7 @@
-import { Typography ,styled,Box} from "@mui/material";
-import { useContext ,useEffect,useState} from "react";
+import { Typography, styled, Box } from "@mui/material";
+import { useContext, useEffect, useState } from "react";
 import { AccountContext } from "../../../Context/AccountProvider";
-import { setConversation,getConversation } from "../../../service/api";
+import { setConversation, getConversation } from "../../../service/api";
 import { formatDate } from "../../../utils/common-utils";
 
 
@@ -11,8 +11,8 @@ const Component = styled(Box)`
     padding: 13px 0;
     cursor: pointer;
 `;
-    
-const Image = styled('img') ({
+
+const Image = styled('img')({
     width: 50,
     height: 50,
     objectFit: 'cover',
@@ -41,39 +41,39 @@ const Text = styled(Typography)`
 
 
 
-const Conversation =({user})=>{
+const Conversation = ({ user }) => {
 
 
-    const [message,setMessage]=useState({});
-    const {setPerson,account,newMessageFlag} =useContext(AccountContext);
+    const [message, setMessage] = useState({});
+    const { setPerson, account, newMessageFlag } = useContext(AccountContext);
 
-     useEffect(()=>{
-        const getConversationDetails=async() =>{
-            const data=await getConversation({senderId:account.sub,receiverId:user.sub});
-            setMessage({text:data?.message,timestamp:data?.updatedAt});
+    useEffect(() => {
+        const getConversationDetails = async () => {
+            const data = await getConversation({ senderId: account.sub, receiverId: user.sub });
+            setMessage({ text: data?.message, timestamp: data?.updatedAt });
         }
         getConversationDetails();
-     },[newMessageFlag])
+    }, [newMessageFlag])
 
-    const getUser=async()=>{
-     setPerson(user);
-     await setConversation({senderId:account.sub,receiverId:user.sub})
+    const getUser = async () => {
+        setPerson(user);
+        await setConversation({ senderId: account.sub, receiverId: user.sub })
     }
 
 
 
 
-    return(
-        <Component onClick={()=>getUser()}>
+    return (
+        <Component onClick={() => getUser()}>
             <Box>
-               <Image src={user.picture} alt="dp" />
+                <Image src={user.picture} alt="dp" />
             </Box>
-            <Box style={{width: '100%'}}>
+            <Box style={{ width: '100%' }}>
                 <Container>
                     <Typography>{user.name}</Typography>
-                    { 
-                        message?.text && 
-                        <Timestamp>{formatDate(message?.timestamp)}</Timestamp>        
+                    {
+                        message?.text &&
+                        <Timestamp>{formatDate(message?.timestamp)}</Timestamp>
                     }
                 </Container>
                 <Box>

@@ -1,23 +1,23 @@
 
 
 
-import {Box,styled} from '@mui/material';
+import { Box, styled } from '@mui/material';
 import { AccountContext } from '../../../Context/AccountProvider'
-import { useContext ,useState} from 'react'
-import {Chat as MessageIcon} from '@mui/icons-material';
+import { useContext, useState } from 'react'
+import { Chat as MessageIcon } from '@mui/icons-material';
 import HeaderMenu from './HeaderMenu';
 import InfoDrawer from '../../Drawer/inforDrawer'
 
 
 
-const Component=styled(Box)`
+const Component = styled(Box)`
 height:44px;
 background:#ededed;
 padding : 8px 16px;
 display:flex;
 align-items:center;
 `;
-const Wrappr =styled(Box)`
+const Wrappr = styled(Box)`
 margin-left:auto; 
  &>*{
     margin-left:2px;
@@ -31,11 +31,11 @@ margin-left:auto;
     margin-top:3px;
  }
 `
-const Image=styled('img')({
+const Image = styled('img')({
 
-height:40,
-width:40,
-borderRadius:'50px',
+  height: 40,
+  width: 40,
+  borderRadius: '50px',
 })
 
 
@@ -43,30 +43,30 @@ borderRadius:'50px',
 
 
 
- const Header=()=>{
- const [openDrawer,setOpenDrawer]= useState(false);
+const Header = () => {
+  const [openDrawer, setOpenDrawer] = useState(false);
 
 
-    const {account} =useContext(AccountContext);
-  const toggleDrawer=()=>{
+  const { account } = useContext(AccountContext);
+  const toggleDrawer = () => {
     setOpenDrawer(true);
   }
 
 
-    return(
-        <>
-          <Component>
-            <Image src={account.picture} alt="dp" onClick={()=>toggleDrawer()} />
-            <Wrappr>
-                <MessageIcon />
-                <HeaderMenu setOpenDrawer={setOpenDrawer}/>
-            </Wrappr>
-          </Component>
-          <InfoDrawer open={openDrawer} setOpen={setOpenDrawer} />
+  return (
+    <>
+      <Component>
+        <Image src={account.picture} alt="dp" onClick={() => toggleDrawer()} />
+        <Wrappr>
+          <MessageIcon />
+          <HeaderMenu setOpenDrawer={setOpenDrawer} />
+        </Wrappr>
+      </Component>
+      <InfoDrawer open={openDrawer} setOpen={setOpenDrawer} />
 
-        </>
-    )
- }
+    </>
+  )
+}
 
 
- export default Header;
+export default Header;

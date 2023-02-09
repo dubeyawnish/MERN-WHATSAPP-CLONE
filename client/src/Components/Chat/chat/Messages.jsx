@@ -1,7 +1,8 @@
 import { Box, Typography, styled } from '@mui/material';
-import { useContext, useEffect, useState,useRef } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import { AccountContext } from '../../../Context/AccountProvider'
 import { getMessages, newMessage } from '../../../service/api';
+//import ReactScrollToBottom from 'react-scroll-to-bottom'
 
 import Footer from './Footer';
 import Message from './Message';
@@ -17,31 +18,31 @@ const Component = styled(Box)`
     overflow-y: scroll;
 `;
 
-const Container=styled(Box)`
+const Container = styled(Box)`
  padding :1px 80px;
 `
 
 
 const Messages = ({ person, conversation }) => {
-    const[messages,setMessages]=useState([]);
+    const [messages, setMessages] = useState([]);
     const [value, setValue] = useState('');
-    const { account,socket,newMessageFlag,setNewMessageFlag } = useContext(AccountContext);
-    const [image,setImage]=useState('');
-    const scrollRef=useRef();
-    
-    const [file,setFile]=useState();
-    const [incomingMessage,setIncomingMessage]=useState(null);
+    const { account, socket, newMessageFlag, setNewMessageFlag } = useContext(AccountContext);
+    const [image, setImage] = useState('');
+    const scrollRef = useRef();
+
+    const [file, setFile] = useState();
+    const [incomingMessage, setIncomingMessage] = useState(null);
     //console.log(conversation._id);
 
-   useEffect(()=>{
-   socket.current.on('getMessage',data=> {
-    setIncomingMessage({
-        ...data,
-        createdAt:Date.now()
-    })
-   })
+    useEffect(() => {
+        socket.current.on('getMessage', data => {
+            setIncomingMessage({
+                ...data,
+                createdAt: Date.now()
+            })
+        })
 
-   },[])
+    }, [])
 
     useEffect(() => {
         const getMessageDetails = async () => {
@@ -50,67 +51,69 @@ const Messages = ({ person, conversation }) => {
             setMessages(data);
         }
         getMessageDetails();
-    }, [person._id,conversation._id,newMessageFlag ]);
+    }, [person._id, conversation._id, newMessageFlag]);
 
 
 
-    useEffect(()=>{
-    scrollRef.current?.scrollIntoView({transition:'smooth'});
+    useEffect(() => {
+        scrollRef.current?.scrollIntoView({ transition: 'smooth' });
 
-    },[]);
+    }, []);
 
 
 
-    useEffect(()=>{
-        incomingMessage && conversation?.members?.includes(incomingMessage.senderId) && setMessages(prev=>[...prev,incomingMessage]);
-    },[incomingMessage,conversation])
+    useEffect(() => {
+        incomingMessage && conversation?.members?.includes(incomingMessage.senderId) && setMessages(prev => [...prev, incomingMessage]);
+    }, [incomingMessage, conversation])
 
 
     const sendText = async (e) => {
         const code = e.keycode || e.which;
         if (code === 13) {
-            let message={};
-            if(!file){
-             message = {
-                senderId: account.sub,
-                receiverId: person.sub,
-                conversationId: conversation._id,
-                type: 'text',
-                text: value,
-            
-            }
-        }
-        else{
-             message = {
-                senderId: account.sub,
-                receiverId: person.sub,
-                conversationId: conversation._id,
-                type: 'file',
-                text: image,
-            
-            }
+            let message = {};
+            if (!file) {
+                message = {
+                    senderId: account.sub,
+                    receiverId: person.sub,
+                    conversationId: conversation._id,
+                    type: 'text',
+                    text: value,
 
-        }
-            socket.current.emit('sendMessage',message);
+                }
+            }
+            else {
+                message = {
+                    senderId: account.sub,
+                    receiverId: person.sub,
+                    conversationId: conversation._id,
+                    type: 'file',
+                    text: image,
+
+                }
+
+            }
+            socket.current.emit('sendMessage', message);
 
             await newMessage(message);
             setValue('');
             setFile('');
-            
-            setNewMessageFlag(prev=>!prev);
-        
+
+            setNewMessageFlag(prev => !prev);
+
         }
 
     }
     return (
         <Wrapper>
-            <Component>
+            <Component >
                 {
-                    messages && messages.map(message =>(
+                    messages && messages.map(message => (
                         <Container ref={scrollRef}>
-                             <Message message={message} />
+
+                            <Message message={message} />
+
                         </Container>
-                        
+
                     ))
                 }
 

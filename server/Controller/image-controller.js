@@ -2,7 +2,7 @@ import grid from 'gridfs-stream'
 import mongoose from 'mongoose';
 
 
-const url="http://localhost:8000";
+const url = "http://localhost:8000";
 
 
 let gfs, gridfsBucket;
@@ -18,22 +18,22 @@ conn.once('open', () => {
 
 
 
-export const uploadFile=async (request,response)=>{
-    if(!request.file){
+export const uploadFile = async (request, response) => {
+    if (!request.file) {
         return response.status(404).json('file not found')
 
     }
-    const imageUrl=`${url}/file/${request.file.filename}`;
+    const imageUrl = `${url}/file/${request.file.filename}`;
     return response.status(200).json(imageUrl);
 }
 
 
-export const getImage=async(request,response)=>{
-    try{
-        const file=await gfs.files.findOne({filename:request.params.filename});
-        const readStream=gridfsBucket.openDownloadStream(file._id);
+export const getImage = async (request, response) => {
+    try {
+        const file = await gfs.files.findOne({ filename: request.params.filename });
+        const readStream = gridfsBucket.openDownloadStream(file._id);
         readStream.pipe(response);
-    }catch(error){
+    } catch (error) {
         return response.status(500).json(error.message);
     }
 }

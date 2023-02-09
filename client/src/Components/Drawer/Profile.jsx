@@ -8,7 +8,7 @@ const ImageContainer = styled(Box)`
     justify-content: center;
 `;
 
-const Image = styled('img') ({
+const Image = styled('img')({
     width: 200,
     height: 200,
     borderRadius: '50%',
