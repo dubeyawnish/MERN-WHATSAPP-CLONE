@@ -1,5 +1,5 @@
 import { Box, Typography, styled } from '@mui/material';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState,useRef } from 'react';
 import { AccountContext } from '../../../Context/AccountProvider'
 import { getMessages, newMessage } from '../../../service/api';
 
@@ -27,7 +27,7 @@ const Messages = ({ person, conversation }) => {
     const [value, setValue] = useState('');
     const { account } = useContext(AccountContext);
     const [image,setImage]=useState('');
-
+    const scrollRef=useRef();
     const[newMessageFlag ,setNewMessageFlag]=useState(false);
     const [file,setFile]=useState();
     //console.log(conversation._id);
@@ -42,6 +42,10 @@ const Messages = ({ person, conversation }) => {
         }
         getMessageDetails();
     }, [person._id,conversation._id,newMessageFlag ]);
+    useEffect(()=>{
+    scrollRef.current?.scrollIntoView({transition:'smooth'});
+
+    },[]);
 
 
     const sendText = async (e) => {
@@ -82,8 +86,8 @@ const Messages = ({ person, conversation }) => {
         <Wrapper>
             <Component>
                 {
-                    messages &&messages.map(message =>(
-                        <Container>
+                    messages && messages.map(message =>(
+                        <Container ref={scrollRef}>
                              <Message message={message} />
                         </Container>
                         
