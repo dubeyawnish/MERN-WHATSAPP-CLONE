@@ -1,7 +1,7 @@
-import {Dialog,List,Box,ListItem,styled, Typography} from '@mui/material';
-import {GoogleLogin} from '@react-oauth/google';
+import { Dialog, List, Box, ListItem, styled, Typography } from '@mui/material';
+import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
-import {useContext} from 'react';
+import { useContext } from 'react';
 
 
 // components
@@ -9,17 +9,17 @@ import { qrCodeImage } from '../../Constants/data';
 import { AccountContext } from '../../Context/AccountProvider';
 import { addUser } from '../../service/api';
 
-const Container= styled(Box)`
+const Container = styled(Box)`
 padding: 56px 0 56px 56px;
 `;
 
-const QRCode=styled('img')({
-    height:264,
-    width:264,
-    margin:'50px 0 0 50px'
+const QRCode = styled('img')({
+    height: 264,
+    width: 264,
+    margin: '50px 0 0 50px'
 })
 
-const Title= styled(Typography)`
+const Title = styled(Typography)`
 font-size:26px;
 color:#525252;
 font-weight:300;
@@ -36,66 +36,66 @@ const StyleList = styled(List)`
 }
 `
 
-const dialogStyle={
-    height:'96%',
-    marginTop:'12%',
-    width:'60%',
-    maxWidth:'100%',
-    maxHeight:'100%',
-    boxShadow:'none',
-    overflow:'hidden'
+const dialogStyle = {
+    height: '96%',
+    marginTop: '12%',
+    width: '60%',
+    maxWidth: '100%',
+    maxHeight: '100%',
+    boxShadow: 'none',
+    overflow: 'hidden'
 }
-const Component=styled(Box)`
+const Component = styled(Box)`
  display:flex;
 `
 
 
 
- const LoginDialog = ()=>{
-    const {setAccount} =useContext(AccountContext);
+const LoginDialog = () => {
+    const { setAccount } = useContext(AccountContext);
 
- const onLoginError =(res)=>{
-    console.log('login failed',res)
+    const onLoginError = (res) => {
+        console.log('login failed', res)
 
- }
-  
- const onLoginSuccess =async(res)=>{
-   const decoded= jwt_decode(res.credential);
-   setAccount(decoded);
-   await addUser(decoded);
+    }
 
- }
+    const onLoginSuccess = async (res) => {
+        const decoded = jwt_decode(res.credential);
+        setAccount(decoded);
+        await addUser(decoded);
+
+    }
 
 
-    return(
-        <Dialog  
+    return (
+        <Dialog
             open={true}
-            PaperProps={{sx:dialogStyle}}
+            PaperProps={{ sx: dialogStyle }}
             hideBackdrop={true}
         >
-                <Component>
-                            <Container>
-                                 <Title>To use whatsapp on your computer:</Title>
-                                 <StyleList>
-                                    <ListItem>1. Open whatsapp on your phone</ListItem>
-                                    <ListItem>2. Tap Menu Setting and select whatsapp web</ListItem>
-                                    <ListItem>3. Point your phone to this screen to capture the code</ListItem>
-                                 </StyleList>
-                            </Container>
+            <Component>
+                <Container>
+                    <Title>To use whatsapp on your computer:</Title>
+                    <StyleList>
+                        <ListItem>1. Open whatsapp on your phone</ListItem>
+                        <ListItem>2. Tap Menu Setting and select whatsapp web</ListItem>
+                        <ListItem>3. Point your phone to this screen to capture the code</ListItem>
+                    </StyleList>
+                </Container>
 
-                            <Box style={{position:'relative'}}>
-                                <QRCode src={qrCodeImage} alt="QRcode" />
-                                <Box style={{position:'absolute' ,top:'50%',transform:'translate(25%)'}}>
-                                    <GoogleLogin 
-                                      onSuccess={onLoginSuccess}
-                                      onError={onLoginError}
-                                      />
-                                </Box>
-                            </Box>
-                </Component>
+                <Box style={{ position: 'relative' }}>
+                    <QRCode src={qrCodeImage} alt="QRcode" />
+                    <Box style={{ position: 'absolute', top: '50%', transform: 'translate(25%)' }}>
+                        <GoogleLogin
+                            onSuccess={onLoginSuccess}
+                            onError={onLoginError}
+                        />
+                    </Box>
+                </Box>
+            </Component>
 
         </Dialog>
     )
- }
+}
 
- export default LoginDialog;
+export default LoginDialog;

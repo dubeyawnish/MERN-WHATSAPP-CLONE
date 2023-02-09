@@ -45,7 +45,7 @@ const ChatHeader = ({ person }) => {
     const url = person.picture || defaultProfilePicture;
 
     const { activeUsers } = useContext(AccountContext);
-    console.log(activeUsers);
+    //console.log(activeUsers);
 
     return (
         <Header>

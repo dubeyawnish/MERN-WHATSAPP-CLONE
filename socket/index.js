@@ -22,7 +22,7 @@ const getUser = (userId) => {
 
 
 
-console.log(users);
+//console.log(users);
 io.on('connection', (socket) => {
     console.log('user connected')
 

@@ -1,4 +1,4 @@
-import { Box, Typography, styled } from '@mui/material';
+import { Box,  styled } from '@mui/material';
 import { useContext, useEffect, useState, useRef } from 'react';
 import { AccountContext } from '../../../Context/AccountProvider'
 import { getMessages, newMessage } from '../../../service/api';
