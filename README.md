@@ -10,22 +10,24 @@ This project is a basic replica of the popular instant messaging app, WhatsApp. 
 
 
 ## Technologies Used
-> - ReactJS for building user interface
+> - ReactJS & MaterialUI for building user interface
 > - Context API to store globle state
 > - NodeJS for server-side scripting
 > - Express for creating API routes
 > - MongoDB for storing data
 > - Mongoose for interacting with MongoDB
 > - Axios for making HTTP requests
+> - socket.io for chatting in real time
 
 ## Getting Started
 Clone the repository
 1. Add your own **.env** file in the root directory of both client and server folders with the following variables:
 > - *DATABASE_URL (for MongoDB)*
-2. Run npm install in both the client and server folders to install all the dependencies
+2. Run npm install in  the client, server and socket folders to install all the dependencies
 3. Run npm start in both the client and server folders to start the development server
 4. The Client should be running on http://localhost:3000
-5. The Client should be running on **PORT:8000**
+5. The Server should be running on **PORT:8000**
+6. The Socket should be running on **PORT:9000**
 ### Contributing
 1. Fork the repository
 2. Create your feature branch (git checkout -b feature/fooBar)
