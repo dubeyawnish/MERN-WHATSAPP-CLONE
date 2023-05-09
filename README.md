@@ -1,4 +1,4 @@
-# Project Title: Whatspp-Clone
+# Project Title : Whatspp-Clone
 ## Description
 This project is a basic replica of the popular instant messaging app, WhatsApp. It includes features such as sending and receiving messages in real time and previously chat disaplyed.
 
