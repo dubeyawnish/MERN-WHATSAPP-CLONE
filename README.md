@@ -4,7 +4,7 @@ This project is a basic replica of the popular instant messaging app, WhatsApp. 
 
 ## Features
   > - Google oAuth User authentication
-  > - User profiles
+  > - User profile
   > - Send and receive messages
   > - Send and receive media
 
